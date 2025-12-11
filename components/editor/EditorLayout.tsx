@@ -17,7 +17,7 @@ export default function EditorLayout() {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-zinc-200 bg-white px-6 py-3 dark:border-zinc-800 dark:bg-zinc-900">
           <h1 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-            Markdown CMS
+            Git Markdown CMS
           </h1>
           <SaveButton />
         </div>

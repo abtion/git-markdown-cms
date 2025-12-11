@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   UncontrolledTreeEnvironment,
   Tree,
   StaticTreeDataProvider,
-} from 'react-complex-tree';
-import 'react-complex-tree/lib/style-modern.css';
-import { useEditorStore } from '@/lib/store/editorStore';
-import { adaptGitHubTreeToReactComplexTree } from '@/lib/utils/tree-adapter';
-import type { TreeData } from '@/types/editor';
+} from "react-complex-tree";
+import "react-complex-tree/lib/style-modern.css";
+import { useEditorStore } from "@/lib/store/editorStore";
+import { adaptGitHubTreeToReactComplexTree } from "@/lib/utils/tree-adapter";
+import type { TreeData } from "@/types/editor";
 
 export default function FileTree() {
   const [treeData, setTreeData] = useState<TreeData | null>(null);
@@ -20,24 +20,25 @@ export default function FileTree() {
   useEffect(() => {
     const fetchTree = async () => {
       try {
-        const response = await fetch('/api/github/tree');
+        const response = await fetch("/api/github/tree");
         const data = await response.json();
 
         if (!data.success) {
-          setError(data.error || 'Failed to fetch file tree');
+          // console.log();
+          setError(JSON.stringify(data));
           return;
         }
 
         // Get folder prefix from tree (assumes first item contains it)
-        const folderPrefix = process.env.NEXT_PUBLIC_GITHUB_FOLDER || 'content';
+        const folderPrefix = process.env.NEXT_PUBLIC_GITHUB_FOLDER || "content";
         const adaptedTree = adaptGitHubTreeToReactComplexTree(
           data.tree,
-          folderPrefix
+          folderPrefix,
         );
 
         setTreeData(adaptedTree);
       } catch (err) {
-        setError('Network error occurred');
+        setError("Network error occurred");
       } finally {
         setIsLoading(false);
       }
@@ -67,7 +68,12 @@ export default function FileTree() {
   return (
     <div className="h-full overflow-auto bg-white dark:bg-zinc-950">
       <UncontrolledTreeEnvironment
-        dataProvider={new StaticTreeDataProvider(treeData, (item, data) => ({ ...item, data }))}
+        dataProvider={
+          new StaticTreeDataProvider(treeData, (item, data) => ({
+            ...item,
+            data,
+          }))
+        }
         getItemTitle={(item) => item.data.name}
         viewState={{}}
         onSelectItems={(items) => {
