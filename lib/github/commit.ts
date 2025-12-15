@@ -1,10 +1,10 @@
-import { getOctokit } from './octokit';
+import { getOctokit } from "./octokit";
 
 export async function ensureBranchExists(
   owner: string,
   repo: string,
   sourceBranch: string,
-  targetBranch: string
+  targetBranch: string,
 ): Promise<void> {
   const octokit = getOctokit();
 
@@ -45,7 +45,7 @@ export async function commitFile(
   branch: string,
   path: string,
   content: string,
-  sha: string
+  sha: string,
 ): Promise<{ sha: string; url: string }> {
   const octokit = getOctokit();
 
@@ -53,11 +53,15 @@ export async function commitFile(
     owner,
     repo,
     path,
-    message: 'chore: Update markdown content',
-    content: Buffer.from(content).toString('base64'),
+    message: "chore: Update markdown content",
+    content: Buffer.from(content).toString("base64"),
     sha,
     branch,
   });
+
+  if (!data.commit?.sha || !data.commit?.html_url) {
+    throw new Error("Failed to commit file: Missing commit data");
+  }
 
   return {
     sha: data.commit.sha,

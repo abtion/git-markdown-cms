@@ -70,9 +70,12 @@ export default function FileTree() {
     <div className="h-full overflow-auto bg-white dark:bg-zinc-950">
       <UncontrolledTreeEnvironment
         dataProvider={
-          new StaticTreeDataProvider(treeData, (item, data) => ({
+          new StaticTreeDataProvider(treeData, (item, newName) => ({
             ...item,
-            data,
+            data: {
+              ...item.data,
+              name: newName,
+            },
           }))
         }
         getItemTitle={(item) => item.data.name}
