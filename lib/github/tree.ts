@@ -5,8 +5,8 @@ export async function fetchGitHubTree(): Promise<GitHubTreeItem[]> {
   const octokit = getOctokit();
 
   const repo = process.env.GITHUB_REPO;
-  const branch = process.env.GITHUB_BRANCH;
-  const folder = process.env.GITHUB_FOLDER;
+  const branch = process.env.NEXT_PUBLIC_GITHUB_BRANCH;
+  const folder = process.env.NEXT_PUBLIC_GITHUB_FOLDER;
 
   if (!repo || !branch || !folder) {
     throw new Error("Missing required GitHub environment variables");

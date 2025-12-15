@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     }
 
     const repo = process.env.GITHUB_REPO;
-    const sourceBranch = process.env.GITHUB_BRANCH;
+    const sourceBranch = process.env.NEXT_PUBLIC_GITHUB_BRANCH;
     const targetBranch = process.env.GITHUB_TARGET_BRANCH;
 
     if (!repo || !sourceBranch || !targetBranch) {

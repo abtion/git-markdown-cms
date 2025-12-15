@@ -7,7 +7,7 @@ export async function fetchFileContent(
   const octokit = getOctokit();
 
   const repo = process.env.GITHUB_REPO;
-  const branch = process.env.GITHUB_BRANCH;
+  const branch = process.env.NEXT_PUBLIC_GITHUB_BRANCH;
 
   if (!repo || !branch) {
     throw new Error('Missing required GitHub environment variables');
