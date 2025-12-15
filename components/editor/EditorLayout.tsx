@@ -4,7 +4,7 @@ import FileTree from './FileTree';
 import MarkdownEditor from './MarkdownEditor';
 import MarkdownPreview from './MarkdownPreview';
 import SaveButton from './SaveButton';
-import UnsavedChangesPrompt from './UnsavedChangesPrompt';
+// import UnsavedChangesPrompt from './UnsavedChangesPrompt';
 import { useEditorStore } from '@/lib/store/editorStore';
 
 export default function EditorLayout() {
@@ -12,7 +12,7 @@ export default function EditorLayout() {
 
   return (
     <>
-      <UnsavedChangesPrompt />
+      {/*<UnsavedChangesPrompt />*/}
       <div className="flex h-screen flex-col bg-zinc-50 dark:bg-zinc-950">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-zinc-200 bg-white px-6 py-3 dark:border-zinc-800 dark:bg-zinc-900">
