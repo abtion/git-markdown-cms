@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import type { FileSelection } from '@/types/editor';
+import { create } from "zustand";
+import type { FileSelection, TreeData } from "@/types/editor";
 
 interface EditorState {
   selectedFile: FileSelection | null;
@@ -8,28 +8,31 @@ interface EditorState {
   isDirty: boolean;
   isSaving: boolean;
   error: string | null;
+  treeData: TreeData | null;
 
   setSelectedFile: (file: FileSelection | null) => void;
   setContent: (content: string) => void;
   setOriginalContent: (content: string) => void;
   setSaving: (saving: boolean) => void;
   setError: (error: string | null) => void;
+  setTreeData: (treeData: TreeData | null) => void;
   reset: () => void;
 }
 
 export const useEditorStore = create<EditorState>((set) => ({
   selectedFile: null,
-  content: '',
-  originalContent: '',
+  content: "",
+  originalContent: "",
   isDirty: false,
   isSaving: false,
   error: null,
+  treeData: null,
 
   setSelectedFile: (file) =>
     set({
       selectedFile: file,
-      content: '',
-      originalContent: '',
+      content: "",
+      originalContent: "",
       isDirty: false,
       error: null,
     }),
@@ -51,13 +54,16 @@ export const useEditorStore = create<EditorState>((set) => ({
 
   setError: (error) => set({ error }),
 
+  setTreeData: (treeData) => set({ treeData }),
+
   reset: () =>
     set({
       selectedFile: null,
-      content: '',
-      originalContent: '',
+      content: "",
+      originalContent: "",
       isDirty: false,
       isSaving: false,
       error: null,
+      treeData: null,
     }),
 }));

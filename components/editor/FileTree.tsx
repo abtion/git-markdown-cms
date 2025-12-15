@@ -15,7 +15,7 @@ export default function FileTree() {
   const [treeData, setTreeData] = useState<TreeData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { setSelectedFile } = useEditorStore();
+  const { setSelectedFile, setTreeData: setStoreTreeData } = useEditorStore();
 
   useEffect(() => {
     const fetchTree = async () => {
@@ -37,6 +37,7 @@ export default function FileTree() {
         );
 
         setTreeData(adaptedTree);
+        setStoreTreeData(adaptedTree);
       } catch (err) {
         setError("Network error occurred");
       } finally {
