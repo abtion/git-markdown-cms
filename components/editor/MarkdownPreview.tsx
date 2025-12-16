@@ -108,7 +108,7 @@ export default function MarkdownPreview({ content }: MarkdownPreviewProps) {
 
   return (
     <IPhone16Frame>
-      <div className="prose prose-sm dark:prose-invert max-w-none">
+      <div className="prose prose-sm dark:prose-invert max-w-none p-4">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{

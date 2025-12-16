@@ -116,9 +116,21 @@ body {
     padding-left: 1.625rem;
 }
 
+.prose ul {
+    list-style-type: disc;
+}
+
+.prose ol {
+    list-style-type: decimal;
+}
+
 .prose li {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+}
+
+.prose li::marker {
+    color: #111827;
 }
 
 .prose blockquote {
@@ -218,4 +230,8 @@ body {
 
 .dark .prose tbody tr {
     border-bottom-color: #374151;
+}
+
+.dark .prose li::marker {
+    color: #f9fafb;
 }
